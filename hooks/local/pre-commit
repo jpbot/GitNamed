@@ -1,0 +1,14 @@
+#!/bin/sh
+#
+# Redirect output to stderr.
+exec 1>&2
+
+named-checkconf -z named.conf > /dev/null
+
+if [ $? -ne 0 ]; then
+  named-checkconf -z named.conf
+  echo "\n=================================================================="
+  echo "Configuration or zonefiles don't pass named-check. Commit Canceled"
+  echo "=================================================================="
+  exit 1
+fi
