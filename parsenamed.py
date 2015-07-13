@@ -5,8 +5,12 @@ import iscpy, sys
 
 try:
     # Read in an existing config file
-    with open(sys.argv[1]) as input_config_file:
-        config_string = input_config_file.read()
+    if(sys.argv[1] == '-'):
+        with sys.stdin as input_config_file:
+            config_string = input_config_file.read()
+    else:
+	with open(sys.argv[1]) as input_config_file:
+            config_string = input_config_file.read()
 except:
      print("file not found or not specified")
      quit(1)
